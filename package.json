@@ -1,0 +1,8 @@
+{
+  "name": "vendas-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:glesiosantos/vendas-api.git",
+  "author": "Glêsio Santos <glesioss@gmail.com>",
+  "license": "MIT"
+}

@@ -2,5 +2,11 @@
   "extends": "standard-with-typescript",
   "parserOptions": {
     "project": "./tsconfig.json"
+  },
+  "rules": {
+    "no-console": "warn",
+    "no-inline-comments": "warn",
+    "multiline-comment-style": "warn",
+    "spaced-comment": "warn"
   }
 }

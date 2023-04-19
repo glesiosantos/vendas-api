@@ -4,10 +4,10 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "no-console": "warn",
     "no-inline-comments": "warn",
     "multiline-comment-style": "warn",
     "spaced-comment": "warn",
-    "@typescript-eslint/no-unused-vars": "off"
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/restrict-template-expressions": "off"
   }
 }

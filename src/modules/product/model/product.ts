@@ -3,23 +3,23 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 @Entity('products')
 export class Product {
   @PrimaryGeneratedColumn()
-    id: string
+  id: string
 
   @Column()
-    name: string
+  name: string
 
   @Column()
-    description: string
+  description: string
 
   @Column('decimal')
-    price: number
+  price: number
 
   @Column('int')
-    quantity: number
+  quantity: number
 
   @CreateDateColumn({ name: 'created_at' })
-    createdAt: Date
+  createdAt: Date
 
   @UpdateDateColumn({ name: 'updated_at', update: true })
-    updateAt: Date
+  updateAt: Date
 }

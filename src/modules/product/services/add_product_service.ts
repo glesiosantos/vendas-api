@@ -15,7 +15,7 @@ export class AddProductService {
 
     const existProduct = await productRepository.findOneBy({ name: addProduct.name })
 
-    if (existProduct != null) { throw new AppError('Product already in database') }
+    if (existProduct != null) throw new AppError('Product already in database')
 
     const product = productRepository.create({ name: addProduct.name, description: addProduct.description, price: addProduct.price, quantity: addProduct.quantity })
     return await productRepository.save(product)

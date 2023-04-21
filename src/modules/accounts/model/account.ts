@@ -3,26 +3,26 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 @Entity('accounts')
 export default class Account {
   @PrimaryGeneratedColumn()
-    id: string
+  id: string
 
   @Column()
-    avatar: string
+  avatar: string
 
   @Column()
-    name: string
+  name: string
 
   @Column()
-    email: string
+  email: string
 
   @Column()
-    password: string
+  password: string
 
   @Column({ name: 'is_admin' })
-    isAdmin: boolean
+  isAdmin: boolean
 
   @Column({ name: 'created_at' })
-    createdAt: Date
+  createdAt: Date
 
   @Column({ name: 'updated_at' })
-    updatedAt: Date
+  updatedAt: Date
 }

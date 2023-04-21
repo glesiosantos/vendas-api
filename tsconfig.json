@@ -10,6 +10,7 @@
     "allowJs": true,
     "outDir": "build",
     "esModuleInterop": true,
+    "strictPropertyInitialization": false,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
@@ -20,13 +21,13 @@
         "src/config/"
       ],
       "@modules/*": [
-        "src/modules/"
+        "src/modules"
       ],
       "@shared/*": [
         "src/shared/"
       ],
-    }
+    },
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
   },
-  "emitDecoratorMetadata": true,
-  "experimentalDecorators": true,
 }

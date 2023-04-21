@@ -22,4 +22,11 @@ export default (router: Router): void => {
   }), productController.showProduct)
 
   router.get('/products', productController.loadProduct)
+  router.put('/products/:id', productController.updateProduct)
+
+  router.delete('/products/:id', celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().required()
+    }
+  }), productController.deleteProduct)
 }

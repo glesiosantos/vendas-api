@@ -1,25 +1,25 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
-@Entity("products")
+@Entity('products')
 export class Product {
   @PrimaryGeneratedColumn()
-  id: string
+    id: string
 
   @Column()
-  name: string
+    name: string
 
   @Column()
-  description: string
+    description: string
 
   @Column('decimal')
-  price: number
+    price: number
 
   @Column('int')
-  quantity: number
+    quantity: number
 
-  @CreateDateColumn({ name: "created_at" })
-  createdAt: Date
+  @CreateDateColumn({ name: 'created_at' })
+    createdAt: Date
 
-  @UpdateDateColumn({ name: "updated_at", update: true })
-  updateAt: Date
+  @UpdateDateColumn({ name: 'updated_at', update: true })
+    updateAt: Date
 }

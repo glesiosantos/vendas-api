@@ -12,7 +12,6 @@ app.use(express.json())
 routerSetup(app)
 app.use(errors())
 
-
 app.use((error: Error, request: Request, response: Response, next: NextFunction) => {
   if (error instanceof AppError) {
     return response.status(error.statusCode).json({ status: 'error', message: error.message })
@@ -20,6 +19,5 @@ app.use((error: Error, request: Request, response: Response, next: NextFunction)
 
   return response.status(500).json({ status: 'Server Internal Error', message: 'error.message' })
 })
-
 
 export default app

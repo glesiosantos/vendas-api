@@ -1,6 +1,6 @@
-import { Router } from "express";
+import { type Router } from 'express'
 import { celebrate, Joi, Segments } from 'celebrate'
-import ProductController from "src/modules/product/product_controller";
+import ProductController from 'src/modules/product/product_controller'
 
 const productController = new ProductController()
 
@@ -13,7 +13,7 @@ export default (router: Router): void => {
       quantity: Joi.number().required()
     }
   }),
-    productController.addProduct)
+  productController.addProduct)
 
   router.get('/products/:id', celebrate({
     [Segments.PARAMS]: {

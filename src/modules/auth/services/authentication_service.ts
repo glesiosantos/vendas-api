@@ -26,7 +26,7 @@ export class AuthenticationService {
 
     const token = sign({}, env.apiSecret, {
       subject: account.id,
-      expiresIn: '1d'
+      expiresIn: env.apiExpiresIn
     })
 
     return { token }

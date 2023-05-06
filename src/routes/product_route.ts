@@ -1,11 +1,12 @@
 import { type Router } from 'express'
 import { celebrate, Joi, Segments } from 'celebrate'
 import ProductController from 'src/modules/product/product_controller'
+import isAuthenticated from 'src/modules/auth/middlewares/is_authenticate'
 
 const productController = new ProductController()
 
 export default (router: Router): void => {
-  router.post('/products', celebrate({
+  router.post('/products', isAuthenticated, celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
       price: Joi.number().precision(2).required(),
@@ -21,7 +22,7 @@ export default (router: Router): void => {
     }
   }), productController.showProduct)
 
-  router.get('/products', productController.loadProduct)
+  router.get('/products', isAuthenticated, productController.loadProduct)
   router.put('/products/:id', productController.updateProduct)
 
   router.delete('/products/:id', celebrate({

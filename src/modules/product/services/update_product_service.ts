@@ -23,6 +23,7 @@ export class UpdateProductService {
     product.price = updateProduct.price
     product.quantity = updateProduct.quantity
     product.updateAt = new Date()
-    await productRepository.createQueryBuilder().update(Product).set(product).where('id = :id', { id }).execute()
+    await productRepository.createQueryBuilder().update(Product)
+    .set(product).where('id = :id', { id }).execute()
   }
 }

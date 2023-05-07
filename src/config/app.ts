@@ -4,11 +4,13 @@ import 'express-async-errors'
 import { errors } from 'celebrate'
 import AppError from 'src/shared/erros/app_error'
 import routerSetup from './routes'
+import multerConfig from './multer_config'
 
 const app = express()
 
 app.use(cors())
 app.use(express.json())
+app.use('/files', express.static(multerConfig.directory))
 routerSetup(app)
 app.use(errors())
 

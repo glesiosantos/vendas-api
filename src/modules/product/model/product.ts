@@ -1,6 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
-@Entity("products")
+@Entity('products')
 export class Product {
   @PrimaryGeneratedColumn()
   id: string
@@ -17,9 +17,9 @@ export class Product {
   @Column('int')
   quantity: number
 
-  @CreateDateColumn({ name: "created_at" })
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date
 
-  @UpdateDateColumn({ name: "updated_at", update: true })
+  @UpdateDateColumn({ name: 'updated_at', update: true })
   updateAt: Date
 }

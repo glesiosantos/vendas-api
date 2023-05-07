@@ -1,8 +1,8 @@
-import { AppDataSource } from "src/config/app_data_source";
-import { Product } from "../model/product";
-import AppError from "src/shared/erros/app_error";
+import { AppDataSource } from 'src/config/app_data_source'
+import { Product } from '../model/product'
+import AppError from 'src/shared/erros/app_error'
 
-type UpdateProduct = {
+interface UpdateProduct {
   id: string
   name: string
   description: string
@@ -16,13 +16,13 @@ export class UpdateProductService {
 
     const product = await productRepository.findOne({ where: { id } })
 
-    if (!product) throw new AppError('Product not found')
+    if (product == null) throw new AppError('Product not found')
 
     product.name = updateProduct.name
     product.description = updateProduct.description
     product.price = updateProduct.price
     product.quantity = updateProduct.quantity
     product.updateAt = new Date()
-    productRepository.createQueryBuilder().update(Product).set(product).where('id = :id', { id }).execute()
+    await productRepository.createQueryBuilder().update(Product).set(product).where('id = :id', { id }).execute()
   }
 }

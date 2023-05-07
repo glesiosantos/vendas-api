@@ -8,6 +8,13 @@
     "multiline-comment-style": "warn",
     "spaced-comment": "warn",
     "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/restrict-template-expressions": "off"
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    "n/no-path-concat": "off",
+    "@typescript-eslint/no-throw-literal": "off",
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/indent": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/return-await": "off"
   }
 }

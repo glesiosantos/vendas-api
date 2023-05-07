@@ -6,6 +6,7 @@ import { LoadAccountByIdService } from './services/load_account_by_id_service'
 export class AccountController {
   async loadAccountsRegistered (req: Request, res: Response): Promise<Response> {
     const accountService = new LoadAllAccountService()
+    console.log('************************ ', req.account.id)
     const accounts = await accountService.loadAll()
     return res.status(200).json(accounts)
   }

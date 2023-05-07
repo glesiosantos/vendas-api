@@ -1,6 +1,6 @@
 import { type Router } from 'express'
 import { AccountController } from 'src/modules/accounts/account_controller'
-import isAuthenticated from 'src/modules/auth/middlewares/is_authenticate'
+import isAuthenticated from 'src/shared/middlewares/is_authenticate'
 
 const accountController = new AccountController()
 

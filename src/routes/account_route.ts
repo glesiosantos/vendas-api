@@ -8,7 +8,9 @@ const accountController = new AccountController()
 
 export default (router: Router): void => {
   router.get('/accounts', isAuthenticated, accountController.loadAccountsRegistered)
-  router.get('/accounts/load', accountController.loadAccountsByEmail)
-  router.get('/accounts/load/:id', accountController.loadAccountsById)
+  router.get('/accounts/load', isAuthenticated, accountController.loadAccountsByEmail)
+  router.get('/accounts/load/:id', isAuthenticated, accountController.loadAccountsById)
+  router.get('/accounts/profile', isAuthenticated, accountController.loadProfileById)
+  router.post('/accounts/profile/update', isAuthenticated, accountController.updateAccount)
   router.patch('/accounts/avatar', isAuthenticated, multer(multerConfig).single('avatar'), accountController.uploadAvatarAccount)
 }

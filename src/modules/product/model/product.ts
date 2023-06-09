@@ -1,5 +1,4 @@
-import { Order } from 'src/modules/orders/model/order'
-import { OrderProduct } from 'src/modules/orders/model/order_product'
+import { OrderProduct } from '../../orders/model/order_product'
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
 @Entity('products')

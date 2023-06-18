@@ -27,46 +27,13 @@ export class CreateOrderService {
     const customerExists = await customerRepository.findOneBy({ id: orderModel.customerId })
     if (!customerExists) throw new AppError('Customer not found or null')
 
-    // atribuindo os id
-    const ids: string[] = [] // para popular uma lista de ids fornecidos
-    orderModel.products.map(p => ids.push(p.id))
+    const productIds: string[] = [] // Carregar uma lista de id dos produtos selecionado
+
     // validando a existencia dos produtos
-    const productsExists = await productRepository.find({ where: { id: In(orderModel.products) } })
-    if (!productsExists.length) throw new AppError('Product id not found or null')
+    const productsExists = await productRepository.createQueryBuilder('product').where('product.id IN (:ids)', { productIds }).getMany()
+    productsExists.map(product => product.name)
+    // if (!productsExists.length) throw new AppError('Product id not found or null')
 
-    // chegando produtos inexistentes
-    const productExistsId = productsExists.map(p => p.id)
-    const checkedInexist = orderModel.products.filter(product => !productExistsId.includes(product.id))
-    if (checkedInexist.length) {
-      throw new AppError(`Product not found. ${checkedInexist[0].id}`)
-    }
-
-    const quantityAvailable = orderModel.products.filter(
-      product => productsExists.filter(
-        p => p.id === product.id // verifica o id informado com do banco de dados
-      )[0].quantity >= product.quantity // verifica o stock do banco com a quantidade fornecida
-    )
-
-    if (quantityAvailable.length) {
-      throw new AppError(`The quantity ${quantityAvailable[0].quantity} is not available`)
-    }
-
-    // montar o pedido
-
-    const order: Order = orderRepository.create({
-       customer: customerExists,
-      createdAt: new Date()
-    })
-
-    const productsOrder: OrderProduct[] = []
-
-    orderModel.products.map(product => productsOrder.push({
-      order,
-      product: productsExists.filter(p => p.id === product.id)[0],
-      quantity: product.quantity
-    }))
-
-    order.productOrders = productsOrder
-    await orderRepository.save(order)
+    // await orderRepository.save(order)
   }
 }

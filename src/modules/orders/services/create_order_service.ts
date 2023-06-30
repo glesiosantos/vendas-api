@@ -29,11 +29,57 @@ export class CreateOrderService {
 
     const productIds: string[] = [] // Carregar uma lista de id dos produtos selecionado
 
-    // validando a existencia dos produtos
-    const productsExists = await productRepository.createQueryBuilder('product').where('product.id IN (:ids)', { productIds }).getMany()
-    productsExists.map(product => product.name)
-    // if (!productsExists.length) throw new AppError('Product id not found or null')
+    // capturando os ids da requisição
+    orderModel.products.map(p => productIds.push(p.id))
 
-    // await orderRepository.save(order)
+    // validando a existencia dos produtos
+    const productsExists = await productRepository.find({ where: { id: In(productIds) } })
+
+    if (!productsExists.length) {
+      throw new AppError('Cloud not find any product with then given ids')
+    }
+
+    // Listar os produtos que não foram econtrado
+    const checkInexistProduct = orderModel.products.filter(p => !productIds.includes(p.id))
+
+    // se encontrar algum produto
+    if (checkInexistProduct.length) throw new AppError(`Cloud not found product with ids ${checkInexistProduct}`)
+
+    // comparando se a quantidade é o suficiente para realizar a venda
+    const quantityAvailable = orderModel.products.filter(
+      p => productsExists.filter(prod => prod.id === p.id)[0].quantity >= p.quantity
+    )
+
+    if (!quantityAvailable.length) {
+      throw new AppError(`The quantity ${quantityAvailable[0].quantity} is not available for ${quantityAvailable[0].id}`)
+    }
+
+    //  Criando a lista de produtos do pedido
+    const productsOrder = orderModel.products.map(product => ({
+      product: productsExists.filter(p => p.id === product.id)[0],
+      quantity: product.quantity,
+      price: productsExists.filter(p => p.id === product.id)[0].price
+    }))
+
+    const order = orderRepository.create({
+      customer: customerExists,
+      productOrders: productsOrder,
+      createdAt: new Date()
+    })
+
+    // atualizar as informações no banco
+    const { productOrders } = order
+
+    const updateQuantityStock = productOrders.map(productByOrder => ({
+      id: productByOrder.id,
+      quantity: productsExists.filter(p => p.id === productByOrder.id)[0].quantity - productByOrder.quantity
+    }))
+
+    console.log(updateQuantityStock)
+
+    /*
+     * await orderRepository.save(order)
+     * await productRepository.save(updateQuantityProductByDb)
+     */
   }
 }

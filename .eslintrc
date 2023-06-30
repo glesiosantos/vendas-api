@@ -5,7 +5,7 @@
   },
   "rules": {
     "no-inline-comments": "warn",
-    "multiline-comment-style": "warn",
+    "multiline-comment-style": "off",
     "spaced-comment": "warn",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/restrict-template-expressions": "off",

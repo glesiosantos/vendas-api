@@ -1,6 +1,5 @@
 import { AppDataSource } from 'src/config/app_data_source'
-import Customer from '../model/customer'
-import { custom } from 'joi'
+import { Customer } from '../model/customer'
 
 type UpdateCustomerModel = {
   id: string

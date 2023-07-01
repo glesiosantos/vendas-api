@@ -1,7 +1,6 @@
 import { Joi, Segments, celebrate } from 'celebrate'
 import { type Router } from 'express'
 import { AuthController } from 'src/modules/auth/auth_controller'
-import { JoinAttribute } from 'typeorm/query-builder/JoinAttribute'
 
 const authController = new AuthController()
 

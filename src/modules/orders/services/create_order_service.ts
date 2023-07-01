@@ -55,7 +55,7 @@ export class CreateOrderService {
     }
 
     //  Criando a lista de produtos do pedido
-    const productsOrder = orderModel.products.map(product => ({
+    const products = orderModel.products.map(product => ({
       product: productsExists.filter(p => p.id === product.id)[0],
       quantity: product.quantity,
       price: productsExists.filter(p => p.id === product.id)[0].price
@@ -63,13 +63,13 @@ export class CreateOrderService {
 
     const order = orderRepository.create({
       customer: customerExists,
-      productOrders: productsOrder
+      productsOrder: products
     })
 
     // atualizar a quantidade de produto no banco
-    const { productOrders } = order
+    const { productsOrder } = order
 
-    const updateQuantityStock = productOrders.map(productByOrder => ({
+    const updateQuantityStock = productsOrder.map(productByOrder => ({
       id: productByOrder.product.id,
       quantity: productsExists.filter(p => p.id === productByOrder.product.id)[0].quantity - productByOrder.quantity
     }))

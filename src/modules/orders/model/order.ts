@@ -13,7 +13,7 @@ export class Order {
 
   @OneToMany(() => OrderProduct,
     orderProduct => orderProduct.order, { cascade: true })
-  productOrders: OrderProduct[]
+  productsOrder: OrderProduct[]
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date

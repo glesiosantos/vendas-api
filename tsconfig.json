@@ -10,23 +10,27 @@
     "allowJs": true,
     "outDir": "build",
     "esModuleInterop": true,
+    "strictPropertyInitialization": false,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
+    "typeRoots": [
+      "@types","./node_modules/@types"
+    ],
     "baseUrl": "./",
     "paths": {
       "@config/*": [
         "src/config/"
       ],
       "@modules/*": [
-        "src/modules/"
+        "src/modules"
       ],
       "@shared/*": [
         "src/shared/"
       ],
-    }
+    },
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
   },
-  "emitDecoratorMetadata": true,
-  "experimentalDecorators": true,
 }

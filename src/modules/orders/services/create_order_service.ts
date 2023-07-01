@@ -63,23 +63,18 @@ export class CreateOrderService {
 
     const order = orderRepository.create({
       customer: customerExists,
-      productOrders: productsOrder,
-      createdAt: new Date()
+      productOrders: productsOrder
     })
 
-    // atualizar as informações no banco
+    // atualizar a quantidade de produto no banco
     const { productOrders } = order
 
     const updateQuantityStock = productOrders.map(productByOrder => ({
-      id: productByOrder.id,
-      quantity: productsExists.filter(p => p.id === productByOrder.id)[0].quantity - productByOrder.quantity
+      id: productByOrder.product.id,
+      quantity: productsExists.filter(p => p.id === productByOrder.product.id)[0].quantity - productByOrder.quantity
     }))
 
-    console.log(updateQuantityStock)
-
-    /*
-     * await orderRepository.save(order)
-     * await productRepository.save(updateQuantityProductByDb)
-     */
+    await orderRepository.save(order)
+    await productRepository.save(updateQuantityStock)
   }
 }
